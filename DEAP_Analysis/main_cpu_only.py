@@ -70,7 +70,7 @@ def process_and_save_psd(subject_idx, trial_idx):
     for band, (fmin, fmax) in frequency_bands.items():
         psd, _ = cpu_psd_array_welch(trial_data, sfreq=sampling_frequency, fmin=fmin, fmax=fmax)
         psd_results[band] = psd  # Store results directly in numpy
-
+        
     # Save the results to file (on CPU)
     with open(f'psd_results/subject_{subject_idx:02d}_trial_{trial_idx}.pkl', 'wb') as f:
         pickle.dump({"trial_idx": trial_idx, "band_data": psd_results, "labels": deap_labels[trial_idx]}, f)
@@ -116,7 +116,7 @@ def plot_trial_from_file(subject_idx, trial_idx):
 
 def main():
     """Main processing pipeline with progress bars."""
-    num_subjects = 32
+    num_subjects = 1
     num_trials = 40
 
     # Multi-threading options (consider adjusting based on your system load)
